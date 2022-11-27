@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Consultation</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="app_css.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body style="background: #93d8DD;">
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+    <script id="app_js.js">
+      var Config = {
+        apiKey: "AIzaSyBnsMlpVUeQ9mqpk9n8ndUgDRLg4HTNd_I",
+        authDomain: "firstproject-8f6de.firebaseapp.com",
+        databaseURL: "https://firstproject-8f6de-default-rtdb.firebaseio.com",
+        projectId: "firstproject-8f6de",
+        storageBucket: "firstproject-8f6de.appspot.com",
+        messagingSenderId: "262417797564",
+        appId: "1:262417797564:web:d7e2a4fb58f56d75a61bb9",
+        measurementId: "G-4BL8R64S3H"
+      };
+      firebase.initializeApp(Config);
+      function writeData(){
+        firebase.database.ref("User").set({
+            date: document.getElementById("date").value,
+            time: document.getElementById("time").value,
+            doctor: document.getElementById("doctor").value,
+            hospital: document.getElementById("hospital").value,
+            dept: document.getElementById("dept").value,
+        });
+        getData();
+      }
+      function getData(){
+        firebase.database.ref('/').once('value', function(snapshot){
+          snapshot.forEach(function(childSnapshot)
+          {
+            var childKey=childSnapshot.key;
+            var childData=childSnapshot.val();
+            document.getElementById("data").innerHTML=childData['date']+","+childData['time']+","+childData['doctor']+","+childData['hospital']+","+childData['dept'];
+          })
+      })
+    }
+</script>
+   <!-- <nav class="navbar navbar-expand-lg nav-back fixed-top" 
+    id="mainNav">
+      <div class="container">
+          <a class="navbar-brand" href="#">Medical</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button"
+           data-toggle="collapse" data-target="#navbarResponsive" 
+           aria-controls="navbarResponsive" aria-expanded="false" 
+           aria-label="Toggle navigation"><i class="fas fa-syringe fa-2x"></i>
+           </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" 
+                  href="#about">Services</a></li>
+                  <li class="nav-item"><a class="nav-link" 
+                    href="#about">About</a></li>
+                  <li class="nav-item"><a class="nav-link" 
+                    href="#about">Medical Camps</a></li>
+                  <li class="nav-item"><a class="nav-link"
+                     href="#projects">Team</a></li>
+                  <li class="nav-item"><a class="nav-link" 
+                    href="#signup">Contact</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>-->
+   
+<!-- End Header -->    
+   <!-- ======= Hero Section ======= -->
+  <!-- <section id="hero" class="d-flex align-items-center">
+    <div class="container text-center position-relative">
+      <h1>24/7 Care is available</h1>
+      <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, deleniti.</h2>
+      <a href="#about" class="main-btn">Get Started</a>
+    </div>
+  </section>-->
+  <!-- End Hero -->
+  <div class="container mt-4 p-4">
+      <div class="row">
+          <div class="col-md-6">
+              <h2 class="text-center my-4">
+                  Add Appointment
+              </h2>
+              <form>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                      Date
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="date"id="date"class="form-control" required>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                       Time
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="time"id="time"class="form-control">
+                       </div>
+                </div>
+
+                  <div class="form-group row">
+                      <label class="col-sm-4 col-lg-4">
+                          Consulting Doctor 
+                      </label>
+                      <div class="col-sm-8 col-lg-8">
+                          <input type="text"id="doctor"class="form-control"
+                          required>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                        Hospital
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="text"id="hospital"class="form-control"
+                        required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                        Department Of Consultation 
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="text"id="dept"class="form-control"
+                        required>
+                    </div>
+                </div>
+
+                  <!---->
+                <!-- <div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                        Contact
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="tel"id="contact"class="form-control"
+                        placeholder="123"required>
+                    </div>
+                </div>--> 
+                <!---->
+                
+                <!---->
+                
+                <!---->
+              <!--  <div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                       Symptoms
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <textarea id="symptoms" class="form-control" required></textarea>
+                    </div>
+                </div>-->
+                <!---->
+
+                <!--<div class="form-group row">
+                    <label class="col-sm-4 col-lg-4">
+                        Add A Reminder?
+                    </label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="text"id="patient-name"class="form-control"
+                        required>
+                    </div>
+                </div>-->
+
+                <div class="form-group row justify-content-end">
+                    <div class="col-sm-5">
+                        <button onclick="writeData()" type="submit"class="btn btn-form">
+                            Confirm
+                        </button>
+                    </div>
+                </div>
+
+              </form>
+          </div>
+          <div class="col-md-6">
+              <h2 id="services" class="text-center my-4"></h2>
+              <ul id="consultations"class="list-group"></ul>
+          </div>
+      </div>
+  </div>
+  <!-- Footer-->
+ <!--<footer class="footer py-4 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
+            <div class="col-lg-4 my-3 my-lg-0">
+                <a class="btn btn-back btn-social mx-2" href="#!">
+                  <i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-back btn-social mx-2" href="#!">
+                    <i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-back btn-social mx-2" href="#!">
+                      <i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="col-lg-4 text-lg-right">
+              <a class="mr-3 text" href="#!">Privacy Policy</a>
+              <a href="#!"class="text">Terms of Use</a></div>
+        </div>
+    </div>
+</footer>--> 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    
+   
+  </body>
+</html>

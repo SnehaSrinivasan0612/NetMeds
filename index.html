@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+   <!----<title>Login Form Design | CodeLab</title>---->
+    <link rel="stylesheet" href="trial.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class = "nurse">:
+        <img style = "float: right;" src = "/final1.jpg">  <!--margin: 170px-->
+      </div>
+      <div class="wrapper">
+        <div class="title">Login Form</div>
+          <form action="#">
+            <div class="field">
+              <input id="email" type="text" required>
+              <label>Email Address</label>
+            </div>
+            <div class="field">
+              <input id="password" type="password" required>
+              <label>Password</label>
+            </div>
+            <div class="content">
+              <div class="checkbox">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember me</label>
+              </div>
+              <div class="pass-link"><a href="#">Forgot password?</a></div>
+            </div>
+            <div class="field">
+           <!--   <input id="login" type="submit" name="login" value="Login">-->
+           <input style = "background: linear-gradient(-135deg, #c850c0, #4158d0); color: white" type="button" onclick="window.location.href='./main1.html';" class="btn btn-warning btn-lg" value="Click"/>
+            </div>
+            <div class="signup-link">Not a member? <a href="./signup.html">Signup now</a></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBnsMlpVUeQ9mqpk9n8ndUgDRLg4HTNd_I",
+      authDomain: "firstproject-8f6de.firebaseapp.com",
+      databaseURL: "https://firstproject-8f6de-default-rtdb.firebaseio.com",
+      projectId: "firstproject-8f6de",
+      storageBucket: "firstproject-8f6de.appspot.com",
+      messagingSenderId: "262417797564",
+      appId: "1:262417797564:web:3e9e547ac715e81da61bb9",
+      measurementId: "G-SHB6LSBFC4"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+ /**   sighUp.addEventListener('click',(e) => {
+  
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var username = document.getElementById('username').value;
+  
+      createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      set(ref(database,'users/'+user.uid),{
+          username: username,
+          email: email
+      })
+      alert('user created!');
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+      alert(errorMessage);
+    });
+    });*/
+  
+    login.addEventListener('click',(e)=>{
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+    // Signed in 
+            const user = userCredential.user;
+    // ...
+            const dt = new Date();
+            update(ref(database, 'users/' + user.uid),{
+              last_login: dt,
+            })
+
+            alert('User logged in!');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+      });
+
+    });
+  </script>
+</html>
